@@ -399,7 +399,7 @@
                 document.getElementById('content').style.display = 'none';
                 document.getElementById('error').style.display = 'none';
 
-                const response = await fetch(`${API_BASE}/api/trains`);
+                const response = await fetch(`${API_BASE}/api/nazionale`);
 
                 if (!response.ok) {
                     throw new Error(`Errore HTTP: ${response.status}`);
@@ -649,12 +649,12 @@ function displayStatistics(data) {
             // Calcola totale treni
             const totalTreno = (nazionaleStats.totali || 0) + (siciliaStats.totali || 0);
 
-            // Somma i valori da nazionale e sicilia
-            const totalGuaranteed = (nazionaleStats.garantiti || 0) + (siciliaStats.garantiti || 0);
-            const totalSuppressed = (nazionaleStats.soppressi || 0) + (siciliaStats.soppressi || 0);
-            const totalPartialSuppressed = (nazionaleStats.parzialmente_soppressi || 0) + (siciliaStats.parzialmente_soppressi || 0);
-            const totalExecuted = (nazionaleStats.effettuati || 0) + (siciliaStats.effettuati || 0);
-            const totalUngoverned = (nazionaleStats.non_gestiti || 0) + (siciliaStats.non_gestiti || 0);
+            // Usa solo i valori nazionali
+            const totalGuaranteed = nazionaleStats.garantiti || 0;
+            const totalSuppressed = nazionaleStats.soppressi || 0;
+            const totalPartialSuppressed = nazionaleStats.parzialmente_soppressi || 0;
+            const totalExecuted = nazionaleStats.effettuati || 0;
+            const totalUngoverned = nazionaleStats.non_gestiti || 0;
 
             // Calcola totale treni non garantiti
             const totalNonGarantiti = totalTreno - totalGuaranteed;
