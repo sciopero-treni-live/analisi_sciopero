@@ -590,6 +590,15 @@
                 font-size: 0.8em;
                 margin-top: -4px;
             }
+            
+            /* Mobile: trains-legend e trains-body con sfondo bianco */
+            #trains-legend {
+                background: white !important;
+            }
+            
+            #trains-body {
+                background: white;
+            }
         }
     </style>
 </head>
@@ -1123,16 +1132,16 @@
                 let rowColor = '';
                 let statusText = train.status;
                 if (train.status === 'partito') {
-                    rowColor = 'background: rgba(39, 174, 96, 0.15);';
+                    rowColor = 'background: rgba(39, 174, 96, 0.35);';
                     statusText = 'Partito';
                 } else if (train.status === 'arrivato') {
-                    rowColor = 'background: rgba(41, 128, 185, 0.15);';
+                    rowColor = 'background: rgba(41, 128, 185, 0.35);';
                     statusText = 'Arrivato';
                 } else if (train.status === 'soppresso') {
-                    rowColor = 'background: rgba(231, 76, 60, 0.15);';
+                    rowColor = 'background: rgba(231, 76, 60, 0.35);';
                     statusText = 'Soppresso';
                 } else if (train.status === 'parzialmente soppresso') {
-                    rowColor = 'background: rgba(243, 156, 18, 0.15);';
+                    rowColor = 'background: rgba(243, 156, 18, 0.35);';
                     statusText = 'Parz. Soppr.';
                 }
                 
