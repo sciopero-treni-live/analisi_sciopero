@@ -32,6 +32,7 @@
             color: white;
             padding: 30px;
             text-align: center;
+            border-radius: 15px;
         }
 
         .header h1 {
@@ -41,7 +42,7 @@
         }
 
         .chart-container {
-            background: white;
+            background: transparent;
             border-radius: 10px;
             padding: 20px;
             margin: 20px 0;
@@ -117,7 +118,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
             gap: 20px !important;
             padding: 20px !important;
-            background: #f8f9fa !important;
+            background: transparent !important;
             margin: 0 !important;
             margin-left: 20px !important;
             margin-right: 20px !important;
@@ -126,7 +127,7 @@
         }
 
         .stat-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 25px;
             border-radius: 10px;
             text-align: center;
@@ -178,7 +179,7 @@
         }
 
         .comparison-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
@@ -223,7 +224,7 @@
         }
 
         .trains-table {
-            background: white;
+            background: transparent;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
@@ -239,10 +240,16 @@
 
         .table-row {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             padding: 15px 20px;
             border-bottom: 1px solid #ecf0f1;
             transition: background 0.3s ease;
+            text-align: center;
+            align-items: center;
+        }
+
+        .table-row > div {
+            text-align: center;
         }
 
         .table-row:hover {
@@ -256,11 +263,15 @@
         }
 
         .status {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
+            padding: 5px 8px;
+            border-radius: 10px;
+            font-size: 0.75em;
             font-weight: bold;
             text-align: center;
+            display: inline-block;
+            max-width: 90px;
+            word-wrap: break-word;
+            line-height: 1.2;
         }
 
         .status.partito {
@@ -327,22 +338,21 @@
         }
 
         .tab-btn {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Chrome e altri browser */
-            -webkit-touch-callout: none; /* Disabilita il menu di chiamata per iOS */
-            margin: 0 !important; /* Sovrascrive inline styles */
-            width: 100% !important; /* Forza larghezza corretta */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            margin: 0 !important;
+            width: 100% !important;
             border-radius: 8px !important;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
             transition: all 0.3s ease !important;
             cursor: pointer !important;
             border: 2px solid transparent !important;
-            position: relative !important; /* Per posizionamento assoluto frecce */
+            position: relative !important;
         }
 
-        /* Forza cursore pointer su tutti i tab buttons */
         .tab-btn-container .tab-btn {
             cursor: pointer !important;
         }
@@ -364,7 +374,6 @@
             box-shadow: 0 3px 10px rgba(52, 152, 219, 0.4) !important;
         }
 
-        /* Lenti decorative per suggerire interattività */
         .tab-btn::after {
             content: "🔍";
             position: absolute !important;
@@ -395,11 +404,11 @@
         }
 
         .tab-btn * {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Chrome e altri browser */
-            -webkit-touch-callout: none; /* Disabilita il menu di chiamata per iOS */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
         .tab-btn-container {
@@ -447,31 +456,139 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Desktop: card con padding */
+        .top-cards {
+            padding: 0 20px;
+        }
+        
+        /* Mobile: card senza padding */
         @media (max-width: 768px) {
+            .top-cards {
+                padding: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                margin: 0;
+                padding: 10px;
+                border-radius: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+            
+            .header {
+                padding: 15px;
+                border-radius: 10px;
+            }
+            
             .header h1 {
-                font-size: 2em;
+                font-size: 1.5em;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                padding: 10px;
+                margin: 10px 0;
+                box-shadow: none;
+                background: transparent;
             }
 
             .comparison-grid {
                 grid-template-columns: 1fr;
             }
 
-            .table-row {
-                grid-template-columns: 1fr;
-                gap: 5px;
+            .tab-navigation {
+                margin: 10px 0;
+                padding: 10px;
+                box-shadow: none;
+                background: transparent !important;
             }
-
+            
+            .trains-table {
+                margin: 10px 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            
+            .chart-container {
+                margin: 10px 0;
+                box-shadow: none;
+                padding: 10px;
+            }
+            
+            .table-header {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            
+            .table-header > div:last-child {
+                display: none;
+            }
+            
+            .table-row {
+                padding: 8px;
+                font-size: 0.85em;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+            
+            .table-row > div:last-child {
+                display: none;
+            }
+            
             .filters {
                 justify-content: center;
             }
 
             .top-cards {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+                margin: 10px 0;
+            }
+            
+            .top-cards > div {
+                margin: 5px 0;
+                padding: 15px;
+            }
+            
+            .no-trains-message {
+                margin: 10px 0;
+                border: 1px solid #dee2e6;
+            }
+            
+            .tab-btn {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 5px 8px;
+            }
+            
+            .tab-first-line {
+                display: block;
+                text-align: center;
+            }
+            
+            .tab-icon {
+                position: absolute;
+                left: 8px;
+                top:8px;
+                font-size: 1.1em;
+            }
+            
+            .tab-text {
+                font-size: 1em;
+            }
+            
+            .tab-percentage {
+                display: block;
+                font-size: 0.8em;
+                margin-top: -4px;
             }
         }
     </style>
@@ -484,7 +601,7 @@
         </div>
 
         <!-- Card affiancate per sciopero e controlli -->
-        <div id="top-cards" class="top-cards" style="display: none; display: flex; gap: 20px; margin: 20px auto; padding: 0 20px;">
+        <div id="top-cards" class="top-cards" style="display: none; display: flex; gap: 20px; margin: 20px auto;">
             <div id="strike-info" class="strike-card" style="flex: 1; background: #e74c3c; color: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
                 <h2 style="margin-bottom: 15px; font-size: 1.3em;">⚠️ Sciopero in Corso</h2>
                 <div id="strike-details" style="font-size: 0.95em; line-height: 1.4;"></div>
@@ -512,10 +629,10 @@
             <!-- Tab Navigation -->
             <div class="tab-navigation" style="display: flex; margin-bottom: 30px; background: #f8f9fa; border-radius: 10px; padding: 10px; gap: 20px;">
                 <div class="tab-btn-container">
-                    <button class="tab-btn active" onclick="showModal('national')" onmousedown="return false" onselectstart="return false" oncontextmenu="return false" style="flex: 1; padding: 15px; border: none; background: #3498db; color: white; cursor: pointer; font-size: 1.1em; font-weight: bold; margin: 0; border-radius: 5px; transition: all 0.3s ease; width: 100%;">📊 Nazionale<br><span class="tab-percentage">impattati 0% dei treni</span></button>
+                    <button class="tab-btn active" onclick="showModal('national')" onmousedown="return false" onselectstart="return false" oncontextmenu="return false" style="flex: 1; padding: 15px; border: none; background: #3498db; color: white; cursor: pointer; font-size: 1.1em; font-weight: bold; margin: 0; border-radius: 5px; transition: all 0.3s ease; width: 100%;"><span class="tab-first-line"><span class="tab-icon">📊</span><span class="tab-text">Nazionale</span></span><br><span class="tab-percentage">impattati 0% dei treni</span></button>
                 </div>
                 <div class="tab-btn-container">
-                    <button class="tab-btn" onclick="showModal('sicilia')" onmousedown="return false" onselectstart="return false" oncontextmenu="return false" style="flex: 1; padding: 15px; border: none; background: #95a5a6; color: white; cursor: pointer; font-size: 1.1em; font-weight: bold; margin: 0; border-radius: 5px; transition: all 0.3s ease; width: 100%;">📊 Sicilia<br><span class="tab-percentage">impattati 0% dei treni</span></button>
+                    <button class="tab-btn" onclick="showModal('sicilia')" onmousedown="return false" onselectstart="return false" oncontextmenu="return false" style="flex: 1; padding: 15px; border: none; background: #95a5a6; color: white; cursor: pointer; font-size: 1.1em; font-weight: bold; margin: 0; border-radius: 5px; transition: all 0.3s ease; width: 100%;"><span class="tab-first-line"><span class="tab-icon">📊</span><span class="tab-text">Sicilia</span></span><br><span class="tab-percentage">impattati 0% dei treni</span></button>
                 </div>
             </div>
 
@@ -616,13 +733,16 @@
 
             <div class="trains-table" id="trains-table-container" style="display: none;">
                 <div class="table-header">Treni partiti che non sono da garantire</div>
+                <div id="trains-legend" style="padding: 10px 20px; background: transparent; font-size: 0.85em; text-align: center;">
+                    <!-- Legenda generata dinamicamente -->
+                </div>
                 <div id="trains-body">
                     <!-- I dati saranno inseriti dinamicamente -->
                 </div>
             </div>
 
             <!-- Messaggio quando non ci sono treni -->
-            <div id="no-trains-message" class="no-trains-message" style="display: block !important; text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #f8f9fa, #e9ecef); border-radius: 15px; margin: 30px auto; max-width: 600px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 2px solid #dee2e6; position: relative; z-index: 100;">
+            <div id="no-trains-message" class="no-trains-message" style="display: block !important; text-align: center; padding: 40px 20px; background: white; border-radius: 15px; margin: 30px auto; max-width: 600px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border: 2px solid #dee2e6; position: relative; z-index: 100;">
                 <div style="font-size: 1.2em; color: #495057; margin-bottom: 10px;">🚂 Situazione Sicilia</div>
                 <div style="font-size: 1.1em; color: #6c757d; font-weight: 500;">Nessun treno non garantito è partito fino ad ora</div>
             </div>
@@ -630,16 +750,12 @@
     </div>
 
     <script>
-        // Configurazione
         const API_BASE = 'https://mansellrace.synology.me:10101';
         let trainsData = {};
-        let currentFilter = 'all';
         let refreshInterval;
 
-        // Inizializzazione
         document.addEventListener('DOMContentLoaded', function() {
             loadData();
-            // Auto-refresh ogni minuto (o intervallo specificato dall'API)
             setInterval(loadData, 60000);
         });
 
@@ -657,7 +773,6 @@
 
                 trainsData = await response.json();
 
-                // Verifica se i dati sono validi
                 if (!trainsData || !trainsData.metadata) {
                     throw new Error('Dati ricevuti non validi');
                 }
@@ -667,13 +782,11 @@
             } catch (error) {
                 console.error('Errore nel caricamento dati:', error);
 
-                // Mostra errore solo se è un vero errore di connessione
                 if (error.message.includes('fetch') || error.message.includes('network') || error.message.includes('HTTPS')) {
                     document.getElementById('error').textContent =
                         'Errore di connessione. Verifica che l\'API sia in funzione.';
                     document.getElementById('error').style.display = 'block';
                 } else {
-                    // Se l'API funziona ma i dati sono vuoti, mostra comunque la pagina
                     console.log('API funziona ma dati vuoti, mostro pagina con valori 0');
                     displayData(trainsData || { metadata: { statistics: { total_trains: 0, by_category: {} }, strike_info: { descrizione: 'Nessuno sciopero programmato' } }, trains: {} });
                 }
@@ -686,7 +799,6 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('content').style.display = 'block';
 
-            // Aggiorna timestamp nella card
             if (data.metadata.last_updated) {
                 const lastUpdate = new Date(data.metadata.last_updated);
                 if (!isNaN(lastUpdate.getTime())) {
@@ -699,31 +811,23 @@
                 document.getElementById('last-update-display').textContent = 'Mai aggiornato';
             }
 
-            // Info sciopero
             displayStrikeInfo(data.metadata.strike_info);
-
-            // La funzione displayMainPercentage è stata rimossa, quindi non la chiamiamo più.
-            // displayMainPercentage(data);
-
-            // Calcola e aggiorna percentuali nei pulsanti
             updateTabButtons(data);
-
-            // Mostra le card affiancate
             document.getElementById('top-cards').style.display = 'flex';
 
-            // Imposta intervallo di refresh dall'API
             if (data.metadata.refresh_interval) {
                 clearInterval(refreshInterval);
-                refreshInterval = setInterval(loadData,
-                    data.metadata.refresh_interval * 1000);
+                refreshInterval = setInterval(loadData, data.metadata.refresh_interval * 1000);
             }
+
+            displaySiciliaTrainsTable(data.trains);
         }
 
         function displayStrikeInfo(strikeInfo) {
             const strikeDiv = document.getElementById('strike-info');
             const strikeDetails = document.getElementById('strike-details');
-            const strikeCard = strikeDiv.closest('.strike-card'); // Ottieni la card esterna
-            const strikeTitle = strikeCard.querySelector('h2'); // Ottieni il titolo
+            const strikeCard = strikeDiv.closest('.strike-card');
+            const strikeTitle = strikeCard.querySelector('h2');
 
             const now = new Date();
             const inizio = strikeInfo.inizio ? new Date(strikeInfo.inizio) : null;
@@ -734,7 +838,6 @@
             let statusIcon = '';
             let periodoText = 'Non specificato';
 
-            // Formatta date in italiano
             const formatTime = (date) => date.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
             const formatDate = (date) => date.toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric' });
 
@@ -750,32 +853,30 @@
 
                 if (now < inizio) {
                     statusText = 'Sciopero non iniziato';
-                    statusColor = '#f39c12'; // Arancione
+                    statusColor = '#f39c12';
                     statusIcon = '🕒';
                 } else if (now > fine) {
                     statusText = 'Sciopero concluso';
-                    statusColor = '#27ae60'; // Verde
+                    statusColor = '#27ae60';
                     statusIcon = '✅';
                 } else {
                     statusText = 'Sciopero in Corso';
-                    statusColor = '#e74c3c'; // Rosso
+                    statusColor = '#e74c3c';
                     statusIcon = '⚠️';
                 }
             } else if (strikeInfo.descrizione && strikeInfo.descrizione !== 'Nessuno sciopero programmato') {
-                // Se non ci sono date valide ma c'è una descrizione di sciopero
                 statusText = 'Sciopero in Corso';
-                statusColor = '#e74c3c'; // Rosso
+                statusColor = '#e74c3c';
                 statusIcon = '⚠️';
             } else {
                 statusText = 'Nessuno sciopero programmato';
-                statusColor = '#34495e'; // Grigio scuro
+                statusColor = '#34495e';
                 statusIcon = 'ℹ️';
             }
 
-            // Aggiorna il titolo e lo stile della card
             strikeTitle.innerHTML = `${statusIcon} ${statusText}`;
             strikeCard.style.background = statusColor;
-            strikeCard.style.boxShadow = `0 5px 15px ${statusColor}33`; // Ombra leggera
+            strikeCard.style.boxShadow = `0 5px 15px ${statusColor}33`;
 
             strikeDetails.innerHTML = `
                 <strong>${strikeInfo.descrizione || 'Nessuna descrizione'}</strong><br>
@@ -787,24 +888,20 @@
 
         function updateTabButtons(data) {
             const stats = data.metadata.statistics;
-
-            // Usa la nuova struttura dati con nazionale e sicilia separati
             const nazionaleStats = stats.nazionale || {};
             const siciliaStats = stats.sicilia || {};
 
-            // Calcola % impatto nazionale (rispetto ai non garantiti)
             const totalTrenoNazionale = nazionaleStats.totali || 0;
             const totalGuaranteedNazionale = nazionaleStats.garantiti || 0;
             const totalSuppressedNazionale = nazionaleStats.soppressi || 0;
             const totalPartialSuppressedNazionale = nazionaleStats.parzialmente_soppressi || 0;
-            const totalExecutedNazionale = nazionaleStats.effettuati || 0; // Definita qui
+            const totalExecutedNazionale = nazionaleStats.effettuati || 0;
             const totalUngovernedNazionale = nazionaleStats.non_gestiti || 0;
 
             const interessatiNazionale = totalSuppressedNazionale + totalPartialSuppressedNazionale + totalUngovernedNazionale;
             const basePercentualeNazionale = totalExecutedNazionale + interessatiNazionale;
             const percentualeNazionale = basePercentualeNazionale > 0 ? ((interessatiNazionale / basePercentualeNazionale) * 100).toFixed(1) : 0;
 
-            // Calcola % impatto Sicilia (rispetto ai non garantiti Sicilia)
             const totalTrenoSicilia = siciliaStats.totali || 0;
             const totalGuaranteedSicilia = siciliaStats.garantiti || 0;
             const totalSuppressedSicilia = siciliaStats.soppressi || 0;
@@ -816,7 +913,6 @@
             const basePercentualeSicilia = totalExecutedSicilia + interessatiSicilia;
             const percentualeSicilia = basePercentualeSicilia > 0 ? ((interessatiSicilia / basePercentualeSicilia) * 100).toFixed(1) : 0;
 
-            // Aggiorna pulsanti con percentuali
             const nationalPercentageSpan = document.querySelector('.tab-btn-container:nth-child(1) .tab-percentage');
             const siciliaPercentageSpan = document.querySelector('.tab-btn-container:nth-child(2) .tab-percentage');
 
@@ -829,45 +925,37 @@
         }
 
         function showModal(modalType) {
-            // Deseleziona qualsiasi testo selezionato
             if (window.getSelection) {
                 window.getSelection().removeAllRanges();
             } else if (document.selection) {
                 document.selection.empty();
             }
 
-            // Chiudi tutti i modal aperti
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
                 modal.style.display = 'none';
             });
 
-            // Rimuovi classe active da tutti i bottoni
             const tabBtns = document.querySelectorAll('.tab-btn');
             tabBtns.forEach(btn => {
                 btn.classList.remove('active');
                 btn.style.background = '#95a5a6';
             });
 
-            // Mostra il modal selezionato
             document.getElementById(`${modalType}-modal`).style.display = 'block';
 
-            // Evidenzia il bottone attivo
             const activeBtn = event.target.closest('.tab-btn');
             activeBtn.classList.add('active');
             activeBtn.style.background = '#3498db';
 
-            // Carica i dati per il modal selezionato
             loadModalData(modalType);
 
-            // Deseleziona di nuovo dopo un breve delay per sicurezza
             setTimeout(() => {
                 if (window.getSelection) {
                     window.getSelection().removeAllRanges();
                 } else if (document.selection) {
                     document.selection.empty();
                 }
-                // Rimuovi focus dal pulsante
                 if (document.activeElement && document.activeElement.blur) {
                     document.activeElement.blur();
                 }
@@ -877,7 +965,6 @@
         function closeModal(modalType) {
             document.getElementById(`${modalType}-modal`).style.display = 'none';
 
-            // Rimuovi classe active dal bottone
             const btnContainers = document.querySelectorAll('.tab-btn-container');
             btnContainers.forEach(container => {
                 const btn = container.querySelector('.tab-btn');
@@ -901,21 +988,18 @@
             const totalTreno = nazionaleStats.totali || 0;
             document.getElementById('national-total-trains').textContent = totalTreno;
 
-            // Usa i valori diretti dalla nuova struttura
             const totalGuaranteed = nazionaleStats.garantiti || 0;
             const totalSuppressed = nazionaleStats.soppressi || 0;
             const totalPartialSuppressed = nazionaleStats.parzialmente_soppressi || 0;
             const totalExecuted = nazionaleStats.effettuati || 0;
             const totalUngoverned = nazionaleStats.non_gestiti || 0;
 
-            // ASSEGNA I VALORI AGLI ELEMENTI HTML
             document.getElementById('national-garantiti').textContent = totalGuaranteed;
             document.getElementById('national-effettuati').textContent = totalExecuted;
             document.getElementById('national-soppressi').textContent = totalSuppressed;
             document.getElementById('national-parzialmente-soppressi').textContent = totalPartialSuppressed;
             document.getElementById('national-non-gestiti').textContent = totalUngoverned;
 
-            // Nasconde le card con valore 0
             hideZeroCards('national', {
                 'national-garantiti': totalGuaranteed,
                 'national-soppressi': totalSuppressed,
@@ -924,14 +1008,11 @@
                 'national-non-gestiti': totalUngoverned
             });
 
-            // Calcolo % impatto nazionale (treni interessati vs effettuati + interessati)
             const interessati = totalSuppressed + totalPartialSuppressed + totalUngoverned;
             const basePercentuale = totalExecuted + interessati;
             const percentualeImpatto = basePercentuale > 0 ? ((interessati / basePercentuale) * 100).toFixed(1) : 0;
 
             document.getElementById('national-impact-percentage').textContent = `${percentualeImpatto}%`;
-
-            // Crea il grafico a torta per la distribuzione stati nazionale nel modal
             displayModalDistributionChart('national-modal-chart', nazionaleStats, 'Nazionale');
         }
 
@@ -939,25 +1020,21 @@
             const stats = trainsData.metadata.statistics;
             const siciliaStats = stats.sicilia || {};
 
-            // Usa i valori diretti dalla nuova struttura
             const totalTrenoSicilia = siciliaStats.totali || 0;
             document.getElementById('sicilia-total-trains').textContent = totalTrenoSicilia;
 
-            // Usa i valori diretti dalla nuova struttura
             const garantitiSicilia = siciliaStats.garantiti || 0;
             const soppressiSicilia = siciliaStats.soppressi || 0;
             const parzialmenteSoppressiSicilia = siciliaStats.parzialmente_soppressi || 0;
             const effettuatiSicilia = siciliaStats.effettuati || 0;
             const nonGestitiSicilia = siciliaStats.non_gestiti || 0;
 
-            // ASSEGNA I VALORI AGLI ELEMENTI HTML
             document.getElementById('sicilia-garantiti').textContent = garantitiSicilia;
             document.getElementById('sicilia-effettuati').textContent = effettuatiSicilia;
             document.getElementById('sicilia-soppressi').textContent = soppressiSicilia;
             document.getElementById('sicilia-parzialmente-soppressi').textContent = parzialmenteSoppressiSicilia;
             document.getElementById('sicilia-non-gestiti').textContent = nonGestitiSicilia;
 
-            // Nasconde le card con valore 0
             hideZeroCards('sicilia', {
                 'sicilia-garantiti': garantitiSicilia,
                 'sicilia-soppressi': soppressiSicilia,
@@ -966,18 +1043,12 @@
                 'sicilia-non-gestiti': nonGestitiSicilia
             });
 
-            // Calcolo % impatto Sicilia (treni interessati vs non garantiti Sicilia)
             const interessatiSicilia = soppressiSicilia + parzialmenteSoppressiSicilia + nonGestitiSicilia;
             const basePercentualeSicilia = effettuatiSicilia + interessatiSicilia;
             const percentualeImpattoSicilia = basePercentualeSicilia > 0 ? ((interessatiSicilia / basePercentualeSicilia) * 100).toFixed(1) : 0;
 
             document.getElementById('sicilia-impact-percentage').textContent = `${percentualeImpattoSicilia}%`;
-
-            // Crea il grafico a torta per la distribuzione stati Sicilia nel modal
             displayModalDistributionChart('sicilia-modal-chart', siciliaStats, 'Sicilia');
-
-            // La tabella dei treni Sicilia nel modal è stata rimossa come richiesto.
-            // displaySiciliaTrainsTableInModal(trainsData.trains);
         }
 
         function hideZeroCards(modalType, cardsData) {
@@ -993,102 +1064,85 @@
             });
         }
 
-        function displayModalImpactChart(containerId, totalTreno, interessati, percentuale, region) {
-            // Questa funzione non è più necessaria per il grafico a barre,
-            // ma la lascio per evitare errori se fosse ancora chiamata altrove.
-            // Il grafico a torta è gestito da displayModalDistributionChart.
-            const chartContainer = document.getElementById(containerId);
-            chartContainer.innerHTML = ''; // Pulisci il contenuto per evitare duplicati
-        }
-
-        function displaySiciliaTrainsTableInModal(trains) {
-            const tbody = document.getElementById('sicilia-trains-body');
-
-            // Filtra solo treni della Sicilia
-            const siciliaTreno = Object.values(trains).filter(train => train.region === 'Sicilia');
-
-            if (!siciliaTreno || siciliaTreno.length === 0) {
-                tbody.innerHTML = '<div class="table-row" style="text-align: center; padding: 30px;">Nessun treno disponibile per la Sicilia</div>';
-                return;
-            }
-
-            let html = `
-                <div class="table-row header">
-                    <div>Categoria</div>
-                    <div>Numero</div>
-                    <div>Da</div>
-                    <div>A</div>
-                    <div>Orario</div>
-                    <div>Stato</div>
-                    <div>Regione</div>
-                </div>
-            `;
-
-            siciliaTreno.forEach(train => {
-                html += `
-                    <div class="table-row">
-                        <div>${train.category}</div>
-                        <div>${train.train_number}</div>
-                        <div>${train.from_station}</div>
-                        <div>${train.to_station}</div>
-                        <div>${train.departure_time}</div>
-                        <div><span class="status ${train.status.replace(' ', '_').toLowerCase()}">${train.status}</span></div>
-                        <div>${train.region}</div>
-                    </div>
-                `;
-            });
-
-            tbody.innerHTML = html;
-        }
-
         function displaySiciliaTrainsTable(trains) {
             const tableContainer = document.getElementById('trains-table-container');
             const tbody = document.getElementById('trains-body');
+            const legendContainer = document.getElementById('trains-legend');
             const noTrainsMessage = document.getElementById('no-trains-message');
 
-            // Filtra solo treni della Sicilia
             const siciliaTreno = Object.values(trains).filter(train => train.region === 'Sicilia');
 
-            // Conta solo i treni non garantiti (quelli che potrebbero essere soggetti a sciopero)
             const nonGarantitiPartiti = siciliaTreno.filter(train =>
                 train.status === 'partito' || train.status === 'arrivato'
             );
 
             if (!nonGarantitiPartiti || nonGarantitiPartiti.length === 0) {
-                // Nascondi tabella e mostra messaggio
                 tableContainer.style.display = 'none';
                 noTrainsMessage.style.display = 'block !important';
                 console.log('Mostrando messaggio - nessun treno non garantito partito');
                 return;
             }
 
-            // Mostra tabella e nasconde messaggio
             tableContainer.style.display = 'block';
             noTrainsMessage.style.display = 'none';
             console.log('Mostrando tabella - ci sono ' + nonGarantitiPartiti.length + ' treni non garantiti partiti');
 
+            // Genera la legenda dinamicamente in base agli status presenti
+            const statusColors = {
+                'partito': { color: '#27ae60', label: 'Partito' },
+                'arrivato': { color: '#2980b9', label: 'Arrivato' },
+                'parzialmente_soppresso': { color: '#f39c12', label: 'Parz. Soppresso' },
+                'soppresso': { color: '#e74c3c', label: 'Soppresso' }
+            };
+            
+            // Trova gli status unici presenti nei dati
+            const presentStatuses = new Set(siciliaTreno.map(train => train.status));
+            
+            // Genera HTML della legenda
+            let legendHtml = '';
+            const statusOrder = ['partito', 'arrivato', 'parzialmente_soppresso', 'soppresso'];
+            statusOrder.forEach(status => {
+                if (presentStatuses.has(status)) {
+                    const info = statusColors[status];
+                    legendHtml += `<span style="margin-right: 15px;"><span style="display: inline-block; width: 12px; height: 12px; background: ${info.color}; border-radius: 2px; margin-right: 4px;"></span>${info.label}</span>`;
+                }
+            });
+            legendContainer.innerHTML = legendHtml;
+
             let html = `
                 <div class="table-row header">
-                    <div>Categoria</div>
-                    <div>Numero</div>
+                    <div>Treno</div>
                     <div>Da</div>
                     <div>A</div>
                     <div>Orario</div>
                     <div>Stato</div>
-                    <div>Regione</div>
                 </div>
             `;
 
             siciliaTreno.forEach(train => {
+                let rowColor = '';
+                let statusText = train.status;
+                if (train.status === 'partito') {
+                    rowColor = 'background: rgba(39, 174, 96, 0.15);';
+                    statusText = 'Partito';
+                } else if (train.status === 'arrivato') {
+                    rowColor = 'background: rgba(41, 128, 185, 0.15);';
+                    statusText = 'Arrivato';
+                } else if (train.status === 'soppresso') {
+                    rowColor = 'background: rgba(231, 76, 60, 0.15);';
+                    statusText = 'Soppresso';
+                } else if (train.status === 'parzialmente soppresso') {
+                    rowColor = 'background: rgba(243, 156, 18, 0.15);';
+                    statusText = 'Parz. Soppr.';
+                }
+                
                 html += `
-                    <div class="table-row">
-                        <div>${train.category}</div>
+                    <div class="table-row" style="${rowColor}">
                         <div>${train.train_number}</div>
-                        <div>${train.from_station}</div>
-                        <div>${train.to_station}</div>
+                        <div>${train.from}</div>
+                        <div>${train.to}</div>
                         <div>${train.departure_time}</div>
-                        <div><span class="status ${train.status.replace(' ', '_').toLowerCase()}">${train.status}</span></div>
-                        <div>${train.region}</div>
+                        <div>${statusText}</div>
                     </div>
                 `;
             });
@@ -1098,9 +1152,8 @@
 
         function displayModalDistributionChart(containerId, regionStats, regionName) {
             const chartContainer = document.getElementById(containerId);
-            chartContainer.innerHTML = ''; // Pulisci il contenuto precedente
+            chartContainer.innerHTML = '';
 
-            // Crea dati per il grafico a torta della regione specifica, escludendo i "Garantiti"
             const chartData = [
                 { label: 'Effettuati', value: regionStats.effettuati || 0, color: '#27ae60', icon: '✅' },
                 { label: 'Soppressi', value: regionStats.soppressi || 0, color: '#e74c3c', icon: '❌' },
@@ -1115,11 +1168,9 @@
 
             const total = chartData.reduce((sum, item) => sum + item.value, 0);
 
-            // Contenitore principale per il grafico e la legenda
             const mainChartWrapper = document.createElement('div');
             mainChartWrapper.style.cssText = 'display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 20px; margin-top: 20px;';
 
-            // Crea il contenitore per il grafico visuale (SVG)
             const chartDiv = document.createElement('div');
             chartDiv.style.cssText = 'position: relative; width: 200px; height: 200px; flex-shrink: 0;';
 
@@ -1128,7 +1179,6 @@
             svg.setAttribute('height', '200');
             svg.setAttribute('viewBox', '0 0 200 200');
 
-            // Cerchio di sfondo
             const bgCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
             bgCircle.setAttribute('cx', '100');
             bgCircle.setAttribute('cy', '100');
@@ -1138,7 +1188,6 @@
             bgCircle.setAttribute('stroke-width', '20');
             svg.appendChild(bgCircle);
 
-            // Segmenti del grafico
             let currentAngle = 0;
             chartData.forEach((item) => {
                 const percentage = item.value / total;
@@ -1167,23 +1216,6 @@
 
             chartDiv.appendChild(svg);
 
-            // Centro del grafico con totale (rimosso come richiesto)
-            // const centerDiv = document.createElement('div');
-            // centerDiv.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;';
-
-            // const totalDiv = document.createElement('div');
-            // totalDiv.style.cssText = 'font-size: 1.8em; font-weight: bold; color: #2c3e50;';
-            // totalDiv.textContent = total;
-
-            // const totalLabelDiv = document.createElement('div');
-            // totalLabelDiv.style.cssText = 'font-size: 0.8em; color: #7f8c8d;';
-            // totalLabelDiv.textContent = 'Totale';
-
-            // centerDiv.appendChild(totalDiv);
-            // centerDiv.appendChild(totalLabelDiv);
-            // chartDiv.appendChild(centerDiv);
-
-            // Crea il contenuto HTML per la legenda
             const legendDiv = document.createElement('div');
             legendDiv.style.cssText = 'display: flex; flex-direction: column; gap: 8px; flex-grow: 1; min-width: 200px;';
 
@@ -1209,7 +1241,6 @@
                 legendDiv.appendChild(itemDiv);
             });
 
-            // Aggiungi titolo al grafico
             const titleElement = document.createElement('h4');
             titleElement.style.cssText = 'text-align: center; margin-bottom: 20px; color: #2c3e50; width: 100%;';
             titleElement.textContent = '📊 Distribuzione dei Treni Non Garantiti';
