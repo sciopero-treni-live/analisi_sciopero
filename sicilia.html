@@ -1082,12 +1082,8 @@
 
             const siciliaTreno = Object.values(trains).filter(train => train.region === 'Sicilia');
 
-            // Ordina i treni dal più recente al più vecchio
-            siciliaTreno.sort((a, b) => {
-                const timeA = a.departure_time || '';
-                const timeB = b.departure_time || '';
-                return timeB.localeCompare(timeA);
-            });
+            // Inverte l'ordine della lista (dal più recente al più vecchio)
+            siciliaTreno.reverse();
 
             const nonGarantitiPartiti = siciliaTreno.filter(train =>
                 train.status === 'partito' || train.status === 'arrivato'
