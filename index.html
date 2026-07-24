@@ -321,7 +321,7 @@
                 const lastUpdate = new Date(data.metadata.last_updated);
                 if (!isNaN(lastUpdate.getTime())) {
                     document.getElementById('last-update').textContent =
-                        lastUpdate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+                        lastUpdate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
                 } else {
                     document.getElementById('last-update').textContent = 'Data non valida';
                 }
@@ -338,6 +338,34 @@
             }
         }
 
+        // strike_info.inizio/fine arrivano come ora locale di Roma naive ("YYYY-MM-DD HH:MM").
+        // Le interpretiamo esplicitamente nel fuso Europe/Rome così stato e periodo sono
+        // corretti per qualsiasi visitatore, non solo per chi ha il browser in Italia.
+        function offsetRomaMs(date) {
+            const dtf = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Europe/Rome', hour12: false,
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            const p = {};
+            for (const part of dtf.formatToParts(date)) p[part.type] = part.value;
+            const comeUTC = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
+            return comeUTC - date.getTime();
+        }
+
+        function parseOraRoma(str) {
+            if (!str) return null;
+            const m = String(str).trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+            if (!m) {
+                const d = new Date(str);
+                return isNaN(d.getTime()) ? null : d;
+            }
+            const comeUTC = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+            // Sottrae l'offset di Roma per ottenere l'istante reale (una passata basta
+            // fuori dai rari minuti di transizione ora legale/solare).
+            return new Date(comeUTC - offsetRomaMs(new Date(comeUTC)));
+        }
+
         function displayStrikeInfo(strikeInfo) {
             const strikeDiv = document.getElementById('strike-info');
             const strikeDetails = document.getElementById('strike-details');
@@ -345,20 +373,20 @@
             const strikeTitle = strikeCard.querySelector('h2');
 
             const now = new Date();
-            const inizio = strikeInfo.inizio ? new Date(strikeInfo.inizio) : null;
-            const fine = strikeInfo.fine ? new Date(strikeInfo.fine) : null;
+            const inizio = strikeInfo.inizio ? parseOraRoma(strikeInfo.inizio) : null;
+            const fine = strikeInfo.fine ? parseOraRoma(strikeInfo.fine) : null;
 
             let statusText = '';
             let statusColor = '';
             let statusIcon = '';
             let periodoText = 'Non specificato';
 
-            const formatTime = (date) => date.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
-            const formatDate = (date) => date.toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric' });
+            const formatTime = (date) => date.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome' });
+            const formatDate = (date) => date.toLocaleDateString('it-IT', { day: 'numeric', month: 'numeric', timeZone: 'Europe/Rome' });
 
             if (inizio && fine) {
-                const giornoInizio = inizio.toDateString();
-                const giornoFine = fine.toDateString();
+                const giornoInizio = inizio.toLocaleDateString('it-IT', { timeZone: 'Europe/Rome' });
+                const giornoFine = fine.toLocaleDateString('it-IT', { timeZone: 'Europe/Rome' });
 
                 if (giornoInizio === giornoFine) {
                     periodoText = `dalle ${formatTime(inizio)} alle ${formatTime(fine)} del ${formatDate(inizio)}`;
