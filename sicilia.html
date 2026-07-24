@@ -223,6 +223,17 @@
             color: white;
         }
 
+        #trains-legend {
+            margin: 0 20px 20px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            font-size: 0.85em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
         .trains-table {
             background: transparent;
             border-radius: 10px;
@@ -277,11 +288,6 @@
 
         .status.partito {
             background: #27ae60;
-            color: white;
-        }
-
-        .status.arrivato {
-            background: #2980b9;
             color: white;
         }
 
@@ -592,9 +598,12 @@
                 margin-top: -4px;
             }
             
-            /* Mobile: trains-legend e trains-body con sfondo bianco */
+            /* Mobile: trains-legend come card trasparente (niente box bianco squadrato); trains-body resta bianco */
             #trains-legend {
-                background: white !important;
+                margin: 10px 0;
+                padding: 10px;
+                background: transparent;
+                box-shadow: none;
             }
             
             #trains-body {
@@ -742,7 +751,7 @@
 
 
             <!-- Filtri per stato: chip cliccabili, sempre visibili anche a tabella vuota -->
-            <div id="trains-legend" style="padding: 10px 20px; background: transparent; font-size: 0.85em; text-align: center;">
+            <div id="trains-legend">
                 <!-- Filtri generati dinamicamente -->
             </div>
 
@@ -768,10 +777,9 @@
 
         // Filtri per stato: chip selezionabili, persistiti in localStorage
         const FILTRI_STORAGE_KEY = 'sicilia_filtri_stati';
-        const FILTRI_DEFAULT = ['partito', 'arrivato', 'parzialmente_soppresso'];
+        const FILTRI_DEFAULT = ['partito', 'parzialmente_soppresso'];
         const STATI_FILTRO = [
             { id: 'partito', label: 'Partiti', color: '#27ae60' },
-            { id: 'arrivato', label: 'Arrivati', color: '#2980b9' },
             { id: 'parzialmente_soppresso', label: 'Parz. Soppressi', color: '#f39c12' },
             { id: 'soppresso', label: 'Soppressi', color: '#e74c3c' }
         ];
@@ -811,10 +819,11 @@
 
         function renderFiltri() {
             const container = document.getElementById('trains-legend');
-            container.innerHTML = STATI_FILTRO.map(f => {
+            const chips = STATI_FILTRO.map(f => {
                 const attivo = filtriAttivi.includes(f.id);
-                return `<button onclick="toggleFiltro('${f.id}')" style="cursor: pointer; border: 2px solid ${f.color}; background: ${attivo ? f.color : 'white'}; color: ${attivo ? 'white' : f.color}; border-radius: 15px; padding: 5px 12px; margin: 3px 4px; font-size: 1em; font-weight: bold; opacity: ${attivo ? '1' : '0.55'};">${attivo ? '✓ ' : ''}${f.label}</button>`;
+                return `<button onclick="toggleFiltro('${f.id}')" style="cursor: pointer; border: 2px solid ${f.color}; background: ${attivo ? f.color : 'white'}; color: ${attivo ? 'white' : f.color}; border-radius: 15px; padding: 6px 14px; margin: 3px 4px; font-size: 1em; font-weight: bold; opacity: ${attivo ? '1' : '0.55'}; transition: all 0.2s ease;">${attivo ? '✓ ' : ''}${f.label}</button>`;
             }).join('');
+            container.innerHTML = `<div style="text-transform: uppercase; letter-spacing: 1px; color: #7f8c8d; font-size: 0.9em; margin-bottom: 10px; font-weight: 600;">Filtra per stato</div>${chips}`;
         }
 
         function aggiornaTutto() {
@@ -1192,9 +1201,6 @@
                 if (train.status === 'partito') {
                     rowColor = 'background: rgba(39, 174, 96, 0.35);';
                     statusText = 'Partito';
-                } else if (train.status === 'arrivato') {
-                    rowColor = 'background: rgba(41, 128, 185, 0.35);';
-                    statusText = 'Arrivato';
                 } else if (train.status === 'soppresso') {
                     rowColor = 'background: rgba(231, 76, 60, 0.35);';
                     statusText = 'Soppresso';
